@@ -10,7 +10,7 @@ import { Pressable, Text, View } from "react-native";
 import { useAuth } from "../../src/auth/AuthContext";
 import { C } from "../../src/theme/colors";
 
-function AdminDrawerContent(drawerProps: any) {
+function AdvisorDrawerContent(drawerProps: any) {
   const { logout } = useAuth();
   const router = useRouter();
 
@@ -31,7 +31,7 @@ function AdminDrawerContent(drawerProps: any) {
             fontWeight: "900",
           }}
         >
-          QS Admin
+          QS Advisor
         </Text>
         <Text
           style={{
@@ -40,7 +40,7 @@ function AdminDrawerContent(drawerProps: any) {
             fontSize: 12,
           }}
         >
-          YÖNETİCİ PANELİ
+          DANIŞMAN PANELİ
         </Text>
         <View
           style={{
@@ -78,28 +78,24 @@ function AdminDrawerContent(drawerProps: any) {
   );
 }
 
-export default function AdminLayout() {
+export default function AdvisorLayout() {
   return (
     <Drawer
       screenOptions={{
         headerShown: true,
-        headerStyle: { backgroundColor: C.panel },
         headerLeft: () => <DrawerToggleButton tintColor={C.text} />,
+        headerStyle: { backgroundColor: C.panel },
         headerTintColor: C.text,
         drawerStyle: { backgroundColor: C.panel, width: 280 },
         drawerInactiveTintColor: C.sub,
         drawerActiveTintColor: "white",
         drawerActiveBackgroundColor: C.accent,
       }}
-      drawerContent={(props) => <AdminDrawerContent {...props} />}
+      drawerContent={(props) => <AdvisorDrawerContent {...props} />}
     >
       <Drawer.Screen name="dashboard" options={{ title: "Ana Sayfa" }} />
-      <Drawer.Screen name="advisors" options={{ title: "Danışmanlar" }} />
       <Drawer.Screen name="investors" options={{ title: "Yatırımcılar" }} />
-      <Drawer.Screen name="requests" options={{ title: "İstekler" }} />
       <Drawer.Screen name="trading" options={{ title: "İşlem Sayfası" }} />
-      <Drawer.Screen name="funds" options={{ title: "Fonlar" }} />
-      <Drawer.Screen name="history" options={{ title: "İşlem Geçmişi" }} />
       <Drawer.Screen name="reporting" options={{ title: "Raporlama" }} />
       <Drawer.Screen name="profile" options={{ title: "Profil" }} />
     </Drawer>

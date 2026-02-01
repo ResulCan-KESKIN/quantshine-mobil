@@ -1,16 +1,25 @@
 import {
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerToggleButton,
+    DrawerContentScrollView,
+    DrawerItemList,
 } from "@react-navigation/drawer";
 import { useRouter } from "expo-router";
-import { Drawer } from "expo-router/drawer";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
-import { useAuth } from "../../src/auth/AuthContext";
-import { C } from "../../src/theme/colors";
+import { useAuth } from "../auth/AuthContext";
+import { C } from "../theme/colors";
 
-function AdminDrawerContent(drawerProps: any) {
+type Props = {
+  title: string;
+  subtitle: string;
+  // Drawer props (react-navigation)
+  drawerProps: any;
+};
+
+export default function AppDrawerContent({
+  title,
+  subtitle,
+  drawerProps,
+}: Props) {
   const { logout } = useAuth();
   const router = useRouter();
 
@@ -23,6 +32,7 @@ function AdminDrawerContent(drawerProps: any) {
         backgroundColor: C.sidebarBg ?? "#0b1220",
       }}
     >
+      {/* Header */}
       <View style={{ paddingHorizontal: 16, paddingVertical: 18 }}>
         <Text
           style={{
@@ -31,7 +41,7 @@ function AdminDrawerContent(drawerProps: any) {
             fontWeight: "900",
           }}
         >
-          QS Admin
+          {title}
         </Text>
         <Text
           style={{
@@ -40,8 +50,9 @@ function AdminDrawerContent(drawerProps: any) {
             fontSize: 12,
           }}
         >
-          YÖNETİCİ PANELİ
+          {subtitle}
         </Text>
+
         <View
           style={{
             height: 1,
@@ -51,10 +62,13 @@ function AdminDrawerContent(drawerProps: any) {
         />
       </View>
 
+      {/* Default menu items */}
       <DrawerItemList {...drawerProps} />
 
+      {/* Spacer to push logout to bottom */}
       <View style={{ flex: 1 }} />
 
+      {/* Logout button (red, bottom) */}
       <Pressable
         onPress={async () => {
           await logout();
@@ -75,33 +89,5 @@ function AdminDrawerContent(drawerProps: any) {
         <Text style={{ color: "#ff5a5a", fontWeight: "900" }}>Çıkış Yap</Text>
       </Pressable>
     </DrawerContentScrollView>
-  );
-}
-
-export default function AdminLayout() {
-  return (
-    <Drawer
-      screenOptions={{
-        headerShown: true,
-        headerStyle: { backgroundColor: C.panel },
-        headerLeft: () => <DrawerToggleButton tintColor={C.text} />,
-        headerTintColor: C.text,
-        drawerStyle: { backgroundColor: C.panel, width: 280 },
-        drawerInactiveTintColor: C.sub,
-        drawerActiveTintColor: "white",
-        drawerActiveBackgroundColor: C.accent,
-      }}
-      drawerContent={(props) => <AdminDrawerContent {...props} />}
-    >
-      <Drawer.Screen name="dashboard" options={{ title: "Ana Sayfa" }} />
-      <Drawer.Screen name="advisors" options={{ title: "Danışmanlar" }} />
-      <Drawer.Screen name="investors" options={{ title: "Yatırımcılar" }} />
-      <Drawer.Screen name="requests" options={{ title: "İstekler" }} />
-      <Drawer.Screen name="trading" options={{ title: "İşlem Sayfası" }} />
-      <Drawer.Screen name="funds" options={{ title: "Fonlar" }} />
-      <Drawer.Screen name="history" options={{ title: "İşlem Geçmişi" }} />
-      <Drawer.Screen name="reporting" options={{ title: "Raporlama" }} />
-      <Drawer.Screen name="profile" options={{ title: "Profil" }} />
-    </Drawer>
   );
 }

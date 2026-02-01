@@ -8,4 +8,6 @@ export const C = {
   accent: "#5B5AF3", // mor
   green: "#22C55E",
   red: "#EF4444",
+  sidebarBg: "#0b1220",
+  primary: "#5b5bff",
 };

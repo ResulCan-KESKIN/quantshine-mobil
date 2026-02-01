@@ -10,7 +10,7 @@ import { Pressable, Text, View } from "react-native";
 import { useAuth } from "../../src/auth/AuthContext";
 import { C } from "../../src/theme/colors";
 
-function AdminDrawerContent(drawerProps: any) {
+function InvestorDrawerContent(drawerProps: any) {
   const { logout } = useAuth();
   const router = useRouter();
 
@@ -31,7 +31,7 @@ function AdminDrawerContent(drawerProps: any) {
             fontWeight: "900",
           }}
         >
-          QS Admin
+          QS Investor
         </Text>
         <Text
           style={{
@@ -40,7 +40,7 @@ function AdminDrawerContent(drawerProps: any) {
             fontSize: 12,
           }}
         >
-          YÖNETİCİ PANELİ
+          YATIRIMCI PANELİ
         </Text>
         <View
           style={{
@@ -78,30 +78,29 @@ function AdminDrawerContent(drawerProps: any) {
   );
 }
 
-export default function AdminLayout() {
+export default function InvestorLayout() {
   return (
     <Drawer
       screenOptions={{
         headerShown: true,
-        headerStyle: { backgroundColor: C.panel },
-        headerLeft: () => <DrawerToggleButton tintColor={C.text} />,
         headerTintColor: C.text,
+        headerStyle: { backgroundColor: C.panel },
+        headerTitle: "Quant&Shine",
+        headerLeft: () => <DrawerToggleButton tintColor={C.text} />,
         drawerStyle: { backgroundColor: C.panel, width: 280 },
         drawerInactiveTintColor: C.sub,
         drawerActiveTintColor: "white",
         drawerActiveBackgroundColor: C.accent,
       }}
-      drawerContent={(props) => <AdminDrawerContent {...props} />}
+      drawerContent={(props) => <InvestorDrawerContent {...props} />}
     >
-      <Drawer.Screen name="dashboard" options={{ title: "Ana Sayfa" }} />
-      <Drawer.Screen name="advisors" options={{ title: "Danışmanlar" }} />
-      <Drawer.Screen name="investors" options={{ title: "Yatırımcılar" }} />
-      <Drawer.Screen name="requests" options={{ title: "İstekler" }} />
-      <Drawer.Screen name="trading" options={{ title: "İşlem Sayfası" }} />
-      <Drawer.Screen name="funds" options={{ title: "Fonlar" }} />
-      <Drawer.Screen name="history" options={{ title: "İşlem Geçmişi" }} />
-      <Drawer.Screen name="reporting" options={{ title: "Raporlama" }} />
-      <Drawer.Screen name="profile" options={{ title: "Profil" }} />
+      <Drawer.Screen name="portfolio" options={{ title: "Portföyüm" }} />
+      <Drawer.Screen name="history" options={{ title: "Yatırım Geçmişim" }} />
+      <Drawer.Screen name="reports" options={{ title: "Haftalık Rapor" }} />
+      <Drawer.Screen
+        name="advisor-profile"
+        options={{ title: "Danışman Profili" }}
+      />
     </Drawer>
   );
 }
